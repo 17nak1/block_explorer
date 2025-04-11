@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_11_140029) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_11_183110) do
   create_table "actions", force: :cascade do |t|
     t.string "action_type"
     t.text "data"
@@ -25,10 +25,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_11_140029) do
     t.string "sender"
     t.string "receiver"
     t.boolean "success"
-    t.datetime "tx_time"
+    t.string "tx_time"
     t.string "gas_burnt"
     t.integer "actions_count"
-    t.string "api_id"
+    t.integer "api_id"
     t.string "api_created_at"
     t.string "api_updated_at"
     t.integer "block_height"
