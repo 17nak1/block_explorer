@@ -8,7 +8,11 @@ class CreateTransactions < ActiveRecord::Migration[7.2]
       t.datetime :tx_time
       t.string :gas_burnt # Store as string to keep the percision
       t.integer :actions_count
-      t.references :block, foreign_key: true
+      t.string :api_id
+      t.string :api_created_at
+      t.string :api_updated_at
+      t.integer :block_height
+      t.string :block_hash
       t.timestamps
     end
   end
