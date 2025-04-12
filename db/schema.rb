@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_11_183110) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_12_185231) do
   create_table "actions", force: :cascade do |t|
     t.string "action_type"
     t.text "data"
     t.integer "transaction_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "transfer_deposit"
     t.index ["transaction_id"], name: "index_actions_on_transaction_id"
   end
 

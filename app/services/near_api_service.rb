@@ -43,7 +43,6 @@ class NearApiService
   private
 
   # Save transaction data to the transactions and actions database.
-  #
   # @param transactions [Array] An array of transaction data hashes.
   def save_transactions(transactions)
     transactions.each do |tx|
@@ -64,7 +63,6 @@ class NearApiService
   end
 
   # Extract transaction attributes for database creation.
-  #
   # @param tx [Hash] A hash containing transaction data.
   # @return [Hash] A hash of transaction attributes for database creation.
   def transaction_attributes(tx)
@@ -84,8 +82,7 @@ class NearApiService
     }
   end
 
-  # Saves all action records associated with a transaction.
-  #
+  # Save all action records associated with a transaction.
   # @param transaction [Transaction] The Transaction object to associate actions with.
   # @param actions_data [Array] An array of action data hashes.
   def save_actions(transaction, actions_data)
