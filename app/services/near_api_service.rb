@@ -22,11 +22,15 @@ class NearApiService
   def fetch_transactions
     begin
       response = HTTParty.get(@url)
-      transactions = response.parsed_response
 
-      if response.code != 200 || transactions.blank?
-        return failure_result("Failed to fetch transactions", transactions["error"])
+      # Check if request was successful
+      unless response.code == 200
+        parsed = response.parsed_response rescue nil
+        error_msg = parsed.is_a?(Hash) ? parsed["error"] : nil
+        return failure_result("Failed to fetch transactions! HTTP Status: #{response.code}", error_msg)
       end
+
+      transactions = response.parsed_response
 
       save_transactions(transactions)
       success_result("Transactions fetched and saved!")
@@ -35,7 +39,7 @@ class NearApiService
     rescue HTTParty::Error => e
       failure_result("API request failed", e.message)
     rescue => e
-      Rails.logger.error "Unexpected error in fetch_transactions: #{e.message}"
+      Rails.logger.error "Unexpected error in fetch_transactions: #{e.message}\n#{e.backtrace.join("\n")}"
       failure_result("Unexpected error", e.message)
     end
   end
