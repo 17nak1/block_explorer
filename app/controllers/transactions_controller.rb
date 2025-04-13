@@ -11,11 +11,11 @@ class TransactionsController < ApplicationController
       if result[:success]
         redirect_to root_path, notice: result[:message]
       else
-        Rails.logger.error "Transaction fetch failed: #{result[:message]}, error: #{result[:error]}"
+        Rails.logger.error "\e[31mTransaction fetch failed: #{result[:message]}, error: #{result[:error]}\e[0m"
         redirect_to root_path, alert: result[:message]
       end
-    rescue StandardError => e
-      Rails.logger.error "Unexpected error fetching transactions: #{e.message}"
+    rescue => e
+      Rails.logger.error "\e[31mUnexpected error fetching transactions: #{e.message}\e[0m"
       redirect_to root_path, alert: "An unexpected error occurred."
     end
   end
