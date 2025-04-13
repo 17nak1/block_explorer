@@ -1,0 +1,36 @@
+<%= stylesheet_link_tag 'transactions', media: 'all', 'data-turbolinks-track': 'reload' %>
+<h1>Transaction Details</h1>
+
+<%= link_to "Fetch Transactions", fetch_transactions_path, method: :get, class: "fetch-button" %>
+
+<% if notice %>
+  <p class="notification notice"> <%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="notification alert"> <%= alert %></p>
+<% end %>
+
+<table class="transaction-table">
+  <thead>
+    <tr>
+      <th>Sender</th>
+      <th>Receiver</th>
+      <th>Deposit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |tx| %>
+      <% next unless tx.success %>
+      <% transfer_action = tx.actions.find_by(action_type: "Transfer") %>
+      <% if transfer_action %>
+        <tr>
+          <td><%= tx.sender %></td>
+          <td><%= tx.receiver %></td>
+          <td>
+            <%= transfer_action['transfer_deposit'] %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
