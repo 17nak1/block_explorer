@@ -79,14 +79,6 @@ Then open your browser and navigate to [http://localhost:3000](http://localhost:
 
 ---
 
-## 🧪 Usage
-
-- The root page displays a table of historical **transfer** transactions.
-- Even if the API stops returning older transactions, previously saved ones remain visible.
-- A button in the UI allows you to fetch and save the most recent transactions again.
-
----
-
 ## 📁 Project Structure (Highlights)
 
 - `app/services/near_api_service.rb`: Handles API calls and data storing from the NEAR API.
@@ -102,4 +94,5 @@ Then open your browser and navigate to [http://localhost:3000](http://localhost:
 
 - `actions.data` is stored as `text` to flexibly support other action types in the future.
 - To accommodate transactions with multiple actions, as evidenced by a transaction containing two actions, the app's data model is designed with a one-to-many relationship.
+- To minimize database queries the eager loading is used in the `TransactionsController` to fetch associated `actions` and `transfers` in a single query.
 
