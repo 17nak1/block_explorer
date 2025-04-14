@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
+  # Eager Loading: Load all successful transactions with Transfer type in just a few queries for better performance.
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.includes(actions: :transfer).where(success: true)
   end
 
   # Fetch transactions from NearApiService and redirect to root success.

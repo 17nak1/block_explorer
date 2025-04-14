@@ -20,15 +20,13 @@
   </thead>
   <tbody>
   <% @transactions.each do |tx| %>
-    <% next unless tx.success %>
-    <% transfer_action = tx.actions.find_by(action_type: "Transfer") %>
-    <% if transfer_action && transfer_action.transfer %>
+    <% transfer_action = tx.actions.find { |a| a.action_type == "Transfer" && a.transfer.present? } %>
+  
+    <% if transfer_action %>
       <tr>
         <td><%= tx.sender %></td>
         <td><%= tx.receiver %></td>
-        <td>
-          <%= transfer_action.transfer.deposit %>
-        </td>
+        <td><%= transfer_action.transfer.deposit %></td>
       </tr>
     <% end %>
   <% end %>
