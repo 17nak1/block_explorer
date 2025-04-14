@@ -11,7 +11,7 @@ A simple block explorer web app for a simulated NEAR blockchain. It fetches rece
 
 ## 🧱 Database Schema
 
-This application utilizes two primary tables to manage transaction data: `transactions` and `actions`.
+This application utilizes three primary tables to manage transaction data: `transactions`,`actions`, and `transfers`.
 
 ### `transactions` Table
 
@@ -34,7 +34,13 @@ This application utilizes two primary tables to manage transaction data: `transa
 * **Relationship:** A one-to-many relationship exists between `transactions` and `actions` (one transaction can have multiple associated actions).
 
 > ℹ️ `data` allows flexibility for new or unknown action types in the future. This is useful given the variety of possible NEAR actions.
+### `transfers` Table
 
+* **Purpose:** Stores the deposit amount for each transaction's "Transfer" action.
+* **Columns:**
+    * `action_id` (FOREIGN KEY referencing `actions.id`): Links the transfer record to its corresponding action.
+    * `deposit`: Stores the deposit amount associated with the transfer. It is a string type to accommodate different long amounts.
+* **Relationship:** A one-to-one relationship exists between `actions` and `transfers`.
 
 ## 🚀 Getting Started
 
